@@ -2,7 +2,7 @@ import requests
 import json
 
  
-AUTH_TOK = 'NRAA-e85870cdf29c35e6c4cfe692bce'  # For Put requests you have get admin API Token, else you get permission denied.
+AUTH_TOK = 'NRAA-xxxx'  # For Put requests you have get admin API Token, else you get permission denied.
 HEADERS = {
     'X-Api-Key': '{0}'.format(AUTH_TOK),
     'Content-type': 'application/json',
