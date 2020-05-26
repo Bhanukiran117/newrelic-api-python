@@ -2,7 +2,7 @@ import requests
 import json
 
  
-AUTH_TOK = 'NRA-xxxxxxxxxxxxxxx'  # For Put requests you have get admin API Token, else you get permission denied.
+AUTH_TOK = 'NRAA-e85870cdf29c35e6c4cfe692bce'  # For Put requests you have get admin API Token, else you get permission denied.
 HEADERS = {
     'X-Api-Key': '{0}'.format(AUTH_TOK),
     'Content-type': 'application/json',
@@ -38,10 +38,12 @@ def list_alerts_violations(start_date,end_date,only_open):
     )
     return results.json() if results.status_code == 200 else "{'data':'Not found'}"
     
-
+# List Details of an incident
 incident_data_dict = get_incident(130772850)
 #print(incident_data_dict)
 
+
+#  List open Incidents
 list_alerts_violations = list_alerts_violations(start_date="2020-05-25T16:55:00+00:00",end_date="2020-05-27T16:56:00+00:00",only_open="true")
 #print(list_alerts_violations)
 for violations in list_alerts_violations['violations']:
@@ -70,11 +72,12 @@ def post_incident_close(incident_number):
     )
     return "Close Successful" if results.status_code == 200 else "Close Successful"
 
+#  Ack open Incidents
 for violations in list_alerts_violations['violations']:
     #print(violations['links']['incident_id'])
     print(violations['links']['incident_id'], post_incident_ack(violations['links']['incident_id']))
 
-
+#  Close open Incidents
 for violations in list_alerts_violations['violations']:
     #print(violations['links']['incident_id'])
     print(violations['links']['incident_id'], post_incident_close(violations['links']['incident_id']))
